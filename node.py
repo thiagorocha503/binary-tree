@@ -1,7 +1,7 @@
 from binary_tree_exception import NodeTypeError
 
 
-class NodeTree(object):
+class NodeTree:
 
     def __init__(self, inf=None):
         self.__info = inf
@@ -45,6 +45,8 @@ class NodeTree(object):
             self.__left.__setFather(self)
 
     def isSon(self, node) -> bool:
+        if not isinstance(node, NodeTree):
+            raise NodeTypeError(node)
         if node is not None:
             if self.__father == node:
                 return True
@@ -54,6 +56,8 @@ class NodeTree(object):
             return False
 
     def isBrother(self, node) -> bool:
+        if not isinstance(node, NodeTree):
+            raise NodeTypeError(node)
         if node is not None:
             if node.getFather() == self.__father and (node.getFather() is not None and self.__father is not None):
                 return True
@@ -79,3 +83,21 @@ class NodeTree(object):
                 return True
             else:
                 return False
+
+    def isLeaf(self) -> bool:
+        if self.__left is None and self.__right is None:
+            return True
+        else:
+            return False
+
+    def hasNodeLeft(self) -> bool:
+        if isinstance(self.__left, NodeTree):
+            return True
+        else:
+            return False
+
+    def hasNodeRight(self):
+        if isinstance(self.__right, NodeTree):
+            return True
+        else:
+            return False
