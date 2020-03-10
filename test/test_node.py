@@ -11,7 +11,7 @@ class NodeTreeTest(unittest.TestCase):
         self.assertEqual(node_root.getInfo(), None)
         self.assertEqual(node_root.getLeft(), None)
         self.assertEqual(node_root.getRight(), None)
-        self.assertEqual(node_root.getFather(), None)
+        self.assertEqual(node_root.getParent(), None)
 
         root_value = 7
         node_left_value = 5
@@ -27,11 +27,11 @@ class NodeTreeTest(unittest.TestCase):
         self.assertEqual(node_root.getInfo(), root_value)
         self.assertEqual(node_root.getLeft(), node_left)
         self.assertEqual(node_root.getLeft().getInfo(), node_left_value)
-        self.assertEqual(node_root.getLeft().getFather(), node_root)
+        self.assertEqual(node_root.getLeft().getParent(), node_root)
 
         self.assertEqual(node_root.getRight(), node_right)
         self.assertEqual(node_root.getRight().getInfo(), node_right_value)
-        self.assertEqual(node_root.getRight().getFather(), node_root)
+        self.assertEqual(node_root.getRight().getParent(), node_root)
 
         # Test Exception
         self.assertRaises(NodeTypeError, lambda: node_root.setRight("1"))

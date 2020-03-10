@@ -20,28 +20,28 @@ class BinaryTree:
     def __remove(self, node: NodeTree, value):
         # case found
         if node.getInfo() == value:
-            father: NodeTree = node.getFather()
-            if node.getFather() is None:
+            parent: NodeTree = node.getParent()
+            if node.getParent() is None:
                 raise Exception("Remoção de nó raiz")
             if (node.getLeft() is None) and (node.getRight() is None):
-                print("Nó folha")
+                # print("Nó folha")
                 if node.isLeft():
-                    father.setLeft(None)
+                    parent.setLeft(None)
                 else:
-                    father.setRight(None)
+                    parent.setRight(None)
             elif (node.getLeft() is not None) and (node.getRight() is None):
-                print("Subárvore esquerda")
+                # print("Subárvore esquerda")
                 if node.isLeft():
-                    father.setLeft(node.getLeft())
+                    parent.setLeft(node.getLeft())
                 else:
-                    father.setRight(node.getRight())
+                    parent.setRight(node.getRight())
             elif (node.getLeft() is None) and (node.getRight() is not None):
                 if node.isLeft():
-                    father.setLeft(node.getRight())
+                    parent.setLeft(node.getRight())
                 else:
-                    father.setRight(node.getRight())
+                    parent.setRight(node.getRight())
 
-                print("Subárvore direita")
+                # print("Subárvore direita")
             else:
                 raise Exception("Nó com subárvore esquerda e direita")
 
@@ -108,19 +108,3 @@ class BinaryTree:
 
     def clear(self) -> None:
         self.__root = None
-
-
-if __name__ == '__main__':
-    tree = BinaryTree()
-    number = [7, 5, 9, 3, 6, 8, 10]
-    for i in number:
-        tree.add(i)
-    """
-             7
-        5           9
-    3        6    8    10
-
-    """
-    print(tree.find(7))
-    print(tree.find(7).getLeft().getInfo())
-    print(tree.find(7).getRight().getInfo())

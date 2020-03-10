@@ -7,7 +7,7 @@ class NodeTree:
         self.__info = inf
         self.__left: NodeTree or None = None
         self.__right: NodeTree or None = None
-        self.__father: NodeTree or None = None
+        self.__parent: NodeTree or None = None
 
     def getInfo(self):
         return self.__info
@@ -15,12 +15,12 @@ class NodeTree:
     def setInfo(self, info):
         self.__info = info
 
-    def getFather(self):
-        return self.__father
+    def getParent(self):
+        return self.__parent
 
-    def __setFather(self, father):
+    def __setParent(self, father):
         if isinstance(father, NodeTree) or father is None:
-            self.__father = father
+            self.__parent = father
         else:
             raise NodeTypeError(father)
 
@@ -32,7 +32,7 @@ class NodeTree:
             raise NodeTypeError(node)
         self.__right = node
         if node is not None:
-            self.__right.__setFather(self)
+            self.__right.__setParent(self)
 
     def getLeft(self):
         return self.__left
@@ -42,13 +42,13 @@ class NodeTree:
             raise NodeTypeError(node)
         self.__left = node
         if node is not None:
-            self.__left.__setFather(self)
+            self.__left.__setParent(self)
 
     def isSon(self, node) -> bool:
         if not isinstance(node, NodeTree):
             raise NodeTypeError(node)
         if node is not None:
-            if self.__father == node:
+            if self.__parent == node:
                 return True
             else:
                 return False
@@ -59,7 +59,7 @@ class NodeTree:
         if not isinstance(node, NodeTree):
             raise NodeTypeError(node)
         if node is not None:
-            if node.getFather() == self.__father and (node.getFather() is not None and self.__father is not None):
+            if node.getParent() == self.__parent and (node.getParent() is not None and self.__parent is not None):
                 return True
             else:
                 return False
@@ -67,19 +67,19 @@ class NodeTree:
             return False
 
     def isLeft(self) -> bool:
-        if self.__father is None:
+        if self.__parent is None:
             return False
         else:
-            if self.__father.getLeft() == self:
+            if self.__parent.getLeft() == self:
                 return True
             else:
                 return False
 
     def isRight(self) -> bool:
-        if self.__father is None:
+        if self.__parent is None:
             return False
         else:
-            if self.__father.getRight() == self:
+            if self.__parent.getRight() == self:
                 return True
             else:
                 return False
